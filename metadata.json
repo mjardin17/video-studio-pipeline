@@ -1,0 +1,6 @@
+{
+  "name": "Empire OS Social Machine Manager",
+  "description": "A dashboard and configuration manager for the Empire OS automation channels: Gods and Glory AI, Little Olympus AI, and Iron Legends AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
