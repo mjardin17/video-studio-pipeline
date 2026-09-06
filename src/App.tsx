@@ -24,9 +24,10 @@ import ChannelCard from "./components/ChannelCard";
 import CredsChecker from "./components/CredsChecker";
 import ConfigFileViewer from "./components/ConfigFileViewer";
 import ShortsStudio from "./components/ShortsStudio";
+import MasteringStudio from "./components/MasteringStudio";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"channels" | "shorts" | "creds" | "files">("shorts");
+  const [activeTab, setActiveTab] = useState<"channels" | "mastering" | "shorts" | "creds" | "files">("mastering");
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased pb-16">
@@ -55,44 +56,54 @@ export default function App() {
           <nav className="flex gap-1.5 bg-zinc-100/80 p-1 rounded-xl">
             <button
               onClick={() => setActiveTab("channels")}
-              className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === "channels"
                   ? "bg-white text-zinc-900 shadow-xs"
                   : "text-zinc-500 hover:text-zinc-800"
               }`}
             >
-              Real Channels
+              Channels
+            </button>
+            <button
+              onClick={() => setActiveTab("mastering")}
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+                activeTab === "mastering"
+                  ? "bg-white text-zinc-900 shadow-xs font-semibold text-amber-700"
+                  : "text-zinc-500 hover:text-zinc-800"
+              }`}
+            >
+              <span>Mastering Studio</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             </button>
             <button
               onClick={() => setActiveTab("shorts")}
-              className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
                 activeTab === "shorts"
                   ? "bg-white text-zinc-900 shadow-xs font-semibold text-rose-600"
                   : "text-zinc-500 hover:text-zinc-800"
               }`}
             >
               <span>Shorts Studio</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
             </button>
             <button
               onClick={() => setActiveTab("creds")}
-              className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === "creds"
                   ? "bg-white text-zinc-900 shadow-xs"
                   : "text-zinc-500 hover:text-zinc-800"
               }`}
             >
-              Env Credentials
+              Credentials
             </button>
             <button
               onClick={() => setActiveTab("files")}
-              className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === "files"
                   ? "bg-white text-zinc-900 shadow-xs"
                   : "text-zinc-500 hover:text-zinc-800"
               }`}
             >
-              Repository Files
+              Repo Files
             </button>
           </nav>
 
@@ -177,6 +188,10 @@ export default function App() {
               </div>
             </div>
           </div>
+        )}
+
+        {activeTab === "mastering" && (
+          <MasteringStudio />
         )}
 
         {activeTab === "shorts" && (

@@ -117,3 +117,25 @@ Or with custom arguments via Python:
 python social_machine/generate_shorts.py --channel gods_and_glory --input renders/GG_EP_01.mp4 --start 15 --duration 45 --mode blur_padding --post
 ```
 Adding `--post` will automatically invoke `social_machine/master.py` to distribute the short to TikTok, Instagram Reels, and Facebook once generated!
+
+---
+
+## 🌟 Video & Audio Quality Mastering (Broadcast EBU R128 + Visual Grading)
+
+Empire OS includes a mastering engine (`social_machine/video_master.py` and `MASTER_VIDEO.bat`) to eliminate AI compression artifacts and normalize audio for broadcast standards:
+
+* **Audio Normalization**: Applies EBU R128 (`loudnorm`) targeting **-14 LUFS** (YouTube Longform) and **-16 LUFS** (Shorts/TikTok/Reels) with true peak limiting (-1.5 dBTP).
+* **Channel Visual Profiles**:
+  - `gods_and_glory`: 35mm film grain (`noise=c1s=6:c1f=t+u`) to remove plastic AI gloss + cinematic bronze contrast curves.
+  - `little_olympus`: High-vibrancy saturation (`eq=contrast=1.1:saturation=1.22`) optimized for mobile screens.
+  - `iron_legends`: Unsharp cel-shade masking (`unsharp=5:5:0.85`) + bold retro contrast for crisp 80s anime lines.
+
+### Mastering Commands:
+```bash
+# Master an episode render
+MASTER_VIDEO.bat --input renders/GG_EP_01.mp4 --channel gods_and_glory
+
+# Run pre-flight inspection without re-encoding (checks A/V sync, drift, and codecs)
+MASTER_VIDEO.bat --input renders/GG_EP_01.mp4 --channel gods_and_glory --inspect
+```
+

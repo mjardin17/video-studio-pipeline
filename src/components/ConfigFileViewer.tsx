@@ -275,6 +275,63 @@ echo.
 pause`
   },
   {
+    name: "MASTER_VIDEO.bat",
+    path: "MASTER_VIDEO.bat",
+    language: "batch",
+    content: `@echo off
+echo =======================================================
+echo     EMPIRE OS - VIDEO & AUDIO MASTERING ENGINE
+echo   (Broadcast EBU R128 -14 LUFS + AI Texture Tuning)
+echo =======================================================
+C:\\Users\\jjard\\AppData\\Local\\Programs\\Python\\Python314\\python.exe social_machine/video_master.py %*
+echo.
+pause`
+  },
+  {
+    name: "video_master.py",
+    path: "social_machine/video_master.py",
+    language: "python",
+    content: `import os
+import sys
+import json
+import subprocess
+from pathlib import Path
+
+# Channel mastering profiles
+CHANNEL_MASTERING_PROFILES = {
+    "gods_and_glory": {
+        "name": "Gods and Glory AI",
+        "video_filter": "noise=c1s=6:c1f=t+u,eq=contrast=1.08:brightness=-0.01:saturation=1.05",
+        "crf": 18,
+        "preset": "medium",
+        "target_lufs": -14.0,
+        "true_peak": -1.5,
+        "lra": 7.0,
+        "audio_bitrate": "320k"
+    },
+    "little_olympus": {
+        "name": "Little Olympus AI",
+        "video_filter": "eq=contrast=1.1:saturation=1.22:brightness=0.01,unsharp=3:3:0.5:3:3:0.0",
+        "crf": 18,
+        "preset": "medium",
+        "target_lufs": -14.0,
+        "true_peak": -1.5,
+        "lra": 8.0,
+        "audio_bitrate": "256k"
+    },
+    "iron_legends": {
+        "name": "Iron Legends AI",
+        "video_filter": "unsharp=5:5:0.85:5:5:0.0,eq=contrast=1.14:saturation=1.18",
+        "crf": 17,
+        "preset": "slow",
+        "target_lufs": -14.0,
+        "true_peak": -1.0,
+        "lra": 6.0,
+        "audio_bitrate": "320k"
+    }
+}`
+  },
+  {
     name: "generate_shorts.py",
     path: "social_machine/generate_shorts.py",
     language: "python",
